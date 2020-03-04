@@ -47,11 +47,6 @@ const userSchema = new Schema({
     age: Number,
     biography: String,
     url: String,
-         
-    galleries: [{
-     type: Schema.Types.ObjectId,
-     ref: "Gallery"
-    }],
     
     avatar: {
         type: String,

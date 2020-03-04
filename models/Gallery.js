@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const gallerySchema = new Schema({
     
     name: String,
-    description: String, // The description of the album in the gallery
+    description: String, // The description of the image in the gallery
     
     date: {
         type: Date,
@@ -19,18 +19,25 @@ const gallerySchema = new Schema({
         ref: "Image"
     }],
 
-    background: String,
-    
+    background: [{
+        type: String,
+        default: "https://res.cloudinary.com/daqom8gp8/image/upload/v1583330789/spirale2_ft69zf.png"
+    }],
 
     category: {
         type: String,
-        enum: ["color", "b&w", "portrait", "landscape", "arts", "street", "decoration"]
+        enum: ["various", "b&w", "color", "portrait", "landscape", "arts", "street", "decoration", "architecture"]
     },
      
     style: {
          type: String,
          enum: ["circle", "square", "rectangle", "octagon"]
-     },
+    },
+    
+    creator: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 
 });
 
