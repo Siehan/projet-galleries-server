@@ -35,7 +35,18 @@ router.post("/galleries", uploader.single("background"), (req, res) => {
 router.get("/galleries", async (req, res, next) => {
     try {
         res.json({
-            galleries: await galleryModel.find()
+            galleries: await galleryModel.find().populate("images")
+        });
+    } catch (dbErr) {
+        next(dbErr);
+    }
+});
+
+router.get("/gallery/:id", async (req, res, next) => {
+    console.log(req.params.id)
+    try {
+        res.json({
+            gallery: await galleryModel.findById(req.params.id).populate("images")
         });
     } catch (dbErr) {
         next(dbErr);
